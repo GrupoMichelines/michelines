@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Star, X } from "lucide-react"
+import { Star } from "lucide-react"
 import { collection, addDoc, serverTimestamp } from "firebase/firestore"
 import { db } from "@/app/firebase/config"
 
@@ -34,7 +34,7 @@ export function RatingModal({ isOpen, onClose }: RatingModalProps) {
   const handleSubmit = async () => {
     try {
       setIsSubmitting(true)
-      
+
       const ratingData = {
         rating,
         comment,
@@ -42,13 +42,12 @@ export function RatingModal({ isOpen, onClose }: RatingModalProps) {
         phone,
         status: "Aprovado",
         createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp()
+        updatedAt: serverTimestamp(),
       }
 
       await addDoc(collection(db, "avaliacoes"), ratingData)
       onClose()
-      
-      // Reset form
+
       setRating(0)
       setComment("")
       setName("")
@@ -63,17 +62,19 @@ export function RatingModal({ isOpen, onClose }: RatingModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="w-full max-w-md sm:max-w-lg md:max-w-xl p-4">
         <DialogHeader>
-          <DialogTitle>Avalie nossa empresa</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className="text-center text-xl sm:text-2xl">
+            Avalie nossa empresa
+          </DialogTitle>
+          <DialogDescription className="text-center text-justify text-sm sm:text-base">
             Sua opinião é muito importante para nós. Por favor, avalie sua experiência.
           </DialogDescription>
         </DialogHeader>
-        
+
         <div className="space-y-4">
           <div className="space-y-2">
-            <label htmlFor="name" className="text-sm font-medium">
+            <label htmlFor="name" className="text-sm font-medium block text-justify">
               Nome *
             </label>
             <input
@@ -87,7 +88,7 @@ export function RatingModal({ isOpen, onClose }: RatingModalProps) {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="phone" className="text-sm font-medium">
+            <label htmlFor="phone" className="text-sm font-medium block text-justify">
               Telefone *
             </label>
             <input
@@ -115,7 +116,7 @@ export function RatingModal({ isOpen, onClose }: RatingModalProps) {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="comment" className="text-sm font-medium">
+            <label htmlFor="comment" className="text-sm font-medium block text-justify">
               Comentário (opcional)
             </label>
             <textarea
@@ -137,7 +138,7 @@ export function RatingModal({ isOpen, onClose }: RatingModalProps) {
                 className="mt-1"
                 required
               />
-              <label htmlFor="lgpd-consent" className="text-sm text-gray-600">
+              <label htmlFor="lgpd-consent" className="text-sm text-gray-600 text-justify">
                 Concordo que minha avaliação e dados pessoais possam ser publicados no site da empresa, conforme a Lei Geral de Proteção de Dados (LGPD). *
               </label>
             </div>
@@ -147,8 +148,8 @@ export function RatingModal({ isOpen, onClose }: RatingModalProps) {
             <Button variant="outline" onClick={onClose}>
               Cancelar
             </Button>
-            <Button 
-              onClick={handleSubmit} 
+            <Button
+              onClick={handleSubmit}
               disabled={isSubmitting || rating === 0 || !name || !phone || !lgpdConsent}
             >
               {isSubmitting ? "Enviando..." : "Enviar Avaliação"}
@@ -158,4 +159,4 @@ export function RatingModal({ isOpen, onClose }: RatingModalProps) {
       </DialogContent>
     </Dialog>
   )
-} 
+}
