@@ -1,0 +1,34 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Regras para a coleção de solicitações
+    match /solicitacoes/{documentId} {
+      allow read: if request.auth != null;  // Apenas usuários autenticados podem ler
+      allow create: if true;                // Qualquer um pode criar (para o formulário)
+      allow update, delete: if false;       // Ninguém pode atualizar ou deletar
+    }
+    
+    // Regras para a coleção de notificações
+    match /notificacoes/{documentId} {
+      allow read: if request.auth != null;  // Apenas usuários autenticados podem ler
+      allow create: if true;                // Qualquer um pode criar (para o formulário)
+      allow update: if request.auth != null; // Apenas usuários autenticados podem atualizar
+      allow delete: if false;               // Ninguém pode deletar
+    }
+    
+    // Regras para a coleção de avaliações
+    match /avaliacoes/{documentId} {
+      // Permite leitura pública apenas para avaliações publicadas
+      allow read: if resource.data.status == "Publicado" || request.auth != null;
+      allow create: if true;                  // Qualquer um pode criar (para o formulário)
+      allow update: if request.auth != null;  // Apenas usuários autenticados podem atualizar
+      allow delete: if false;                 // Ninguém pode deletar
+    }
+    
+    // Regras padrão para outras coleções
+    match /{document=**} {
+      allow read, write: if request.auth != null;  // Apenas usuários autenticados
+    }
+  }
+} 
