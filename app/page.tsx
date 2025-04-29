@@ -509,7 +509,7 @@ export default function Home() {
       {showRatingButton && (
         <button
           onClick={() => setIsModalOpen(true)}
-          className="fixed bottom-5 right-4 bg-yellow-400 text-white p-3 rounded-full shadow-lg hover:bg-yellow-500 transition-colors z-50 flex items-center gap-2"
+          className="fixed bottom-5 right-4 bg-yellow-400 text-white p-3 rounded-full shadow-lg hover:bg-yellow-500 transition-colors z-50 flex items-center gap-4"
         >
           <Star className="w-6 h-6" />
           <span className="hidden sm:inline">Avaliar</span>
