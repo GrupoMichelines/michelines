@@ -140,8 +140,8 @@ export function RatingModal({ isOpen, onClose }: RatingModalProps) {
                 required
               />
               <label htmlFor="lgpd-consent" className="text-sm text-gray-600 text-justify">
-                Concordo que minha avaliação e dados pessoais possam ser publicados no site da empresa, conforme a Lei Geral de Proteção de Dados (LGPD). *
-              </label>
+  Concordo que minha avaliação e dados pessoais (meu nome e comentário) possam eventualmente ser publicados no site da empresa, conforme a Lei Geral de Proteção de Dados (LGPD). *
+</label>
             </div>
           </div>
 
