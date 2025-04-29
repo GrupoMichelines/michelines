@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
 import { db } from '@/lib/firebase'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
-import { sendNewDriverNotification } from '@/lib/whatsapp-web'
 
 export async function POST(request: Request) {
   try {
@@ -19,16 +18,6 @@ export async function POST(request: Request) {
       status: 'pending',
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp()
-    })
-
-    // Envia notificação via WhatsApp com todos os dados do motorista
-    await sendNewDriverNotification({
-      name,
-      phone,
-      email,
-      cpf,
-      licenseNumber,
-      vehicleInfo
     })
 
     return NextResponse.json({ 
