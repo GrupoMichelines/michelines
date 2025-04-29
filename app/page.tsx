@@ -37,7 +37,7 @@ export default function Home() {
     // Mostrar o botão após 30 segundos
     const timer = setTimeout(() => {
       setShowRatingButton(true)
-    }, 30000)
+    }, 15000)
 
     return () => clearTimeout(timer)
   }, [])
@@ -343,7 +343,7 @@ export default function Home() {
                     <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
                       <span className="text-blue-700">✉️</span>
                     </div>
-                    <p className="font-medium">contato@michelines.com.br</p>
+                    <p className="font-medium">michelines@michelines.com.br</p>
                   </div>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -509,9 +509,9 @@ export default function Home() {
       {showRatingButton && (
         <button
           onClick={() => setIsModalOpen(true)}
-          className="fixed bottom-4 right-4 bg-yellow-400 text-white p-3 rounded-full shadow-lg hover:bg-yellow-500 transition-colors z-50 flex items-center gap-2"
+          className="fixed bottom-5 right-4 bg-yellow-400 text-white p-3 rounded-full shadow-lg hover:bg-yellow-500 transition-colors z-50 flex items-center gap-2"
         >
-          <Star className="w-5 h-5" />
+          <Star className="w-6 h-6" />
           <span className="hidden sm:inline">Avaliar</span>
         </button>
       )}
