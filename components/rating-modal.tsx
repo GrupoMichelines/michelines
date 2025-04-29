@@ -48,6 +48,7 @@ export function RatingModal({ isOpen, onClose }: RatingModalProps) {
       await addDoc(collection(db, "avaliacoes"), ratingData)
       onClose()
 
+      // Reset form
       setRating(0)
       setComment("")
       setName("")
@@ -62,9 +63,9 @@ export function RatingModal({ isOpen, onClose }: RatingModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-full max-w-md sm:max-w-lg md:max-w-xl p-4">
+      <DialogContent className="w-full max-w-md sm:max-w-lg md:max-w-xl max-h-[90vh] overflow-y-auto p-4 sm:p-6">
         <DialogHeader>
-          <DialogTitle className="text-center text-xl sm:text-2xl">
+          <DialogTitle className="text-center text-lg sm:text-xl">
             Avalie nossa empresa
           </DialogTitle>
           <DialogDescription className="text-center text-justify text-sm sm:text-base">
@@ -72,8 +73,8 @@ export function RatingModal({ isOpen, onClose }: RatingModalProps) {
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-4">
-          <div className="space-y-2">
+        <div className="space-y-3 sm:space-y-4">
+          <div className="space-y-1">
             <label htmlFor="name" className="text-sm font-medium block text-justify">
               Nome *
             </label>
@@ -81,13 +82,13 @@ export function RatingModal({ isOpen, onClose }: RatingModalProps) {
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full p-2 border rounded-md"
+              className="w-full p-2 border rounded-md text-sm"
               placeholder="Seu nome completo"
               required
             />
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-1">
             <label htmlFor="phone" className="text-sm font-medium block text-justify">
               Telefone *
             </label>
@@ -95,7 +96,7 @@ export function RatingModal({ isOpen, onClose }: RatingModalProps) {
               id="phone"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="w-full p-2 border rounded-md"
+              className="w-full p-2 border rounded-md text-sm"
               placeholder="(00) 00000-0000"
               required
             />
@@ -110,12 +111,12 @@ export function RatingModal({ isOpen, onClose }: RatingModalProps) {
                   star <= rating ? "text-yellow-400" : "text-gray-300"
                 } hover:text-yellow-400 transition-colors`}
               >
-                <Star className="w-8 h-8 fill-current" />
+                <Star className="w-7 h-7 sm:w-8 sm:h-8 fill-current" />
               </button>
             ))}
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-1">
             <label htmlFor="comment" className="text-sm font-medium block text-justify">
               Comentário (opcional)
             </label>
@@ -123,12 +124,12 @@ export function RatingModal({ isOpen, onClose }: RatingModalProps) {
               id="comment"
               value={comment}
               onChange={(e) => setComment(e.target.value)}
-              className="w-full min-h-[100px] p-2 border rounded-md"
+              className="w-full min-h-[80px] p-2 border rounded-md text-sm"
               placeholder="Deixe seu comentário aqui..."
             />
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-1">
             <div className="flex items-start gap-2">
               <input
                 type="checkbox"
